@@ -77,7 +77,7 @@ app.post("/create-interesting", csrfProtection, errors, (req, res) => {
 
   if (!age) {
     errors.push("age is required")
-  } else if (parseInt(age) === NaN || parseInt(age) > 120 || parseInt(age) < 0 ){
+  } else if (!parseInt(age) || parseInt(age) > 120 || parseInt(age) < 0 ){
     errors.push("age must be a valid age");
   }
   if (!favoriteBeatle) {
@@ -85,10 +85,11 @@ app.post("/create-interesting", csrfProtection, errors, (req, res) => {
   } else if (favoriteBeatle === "Scooby-Doo") {
     errors.push("favoriteBeatle must be a real Beatle member")
   }
-  // console.log(typeof age);
+  console.log(parseInt(age));
   if (errors.length > 0) {
     // res.render takes the pug file and renders it to HTML for the browser, sends
     // as response to clients
+
     res.render('create-interesting',{ errors,
       firstName,
       lastName,

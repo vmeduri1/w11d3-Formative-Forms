@@ -1,8 +1,5 @@
 mixin addOption(member)
-        if member===favoriteBeatle
-                option(value=member selected="selected")
-        else
-                option(value=member)
+        option(value=member selected=`${favoriteBeatle === member ? 'selected' : '' }`)
 form(method= 'post' action='/create-interesting')
         input(type= 'hidden' name= '_csrf' value= csrfToken)
         label(for= 'firstName') firstName:
@@ -18,14 +15,7 @@ form(method= 'post' action='/create-interesting')
         input(type= 'submit' name= 'submitInput' id='submitInput' value= 'Create Interesting User')
         input(type= 'number' name= 'age' id= 'age' value= age)
         select(name= 'favoriteBeatle')
-                +addOption()
-                option(value="" selected="selected") --Please choose an option--
-                option(value="John" selected="selected") John
-                option(value="Paul" selected="selected") Paul
-                option(value="Ringo" selected="selected") Ringo
-                option(value="George" selected="selected") George
-                option(value="Scooby-Doo" selected="selected") Scooby-Doo
-        if iceCream
-                input(type= 'checkbox' name= 'iceCream' checked=true )
-        else
-                input(type= 'checkbox' name= 'iceCream' checked=false )
+                option(value="") --Please choose an option--
+                each member in ['John', 'Paul', 'Ringo', 'George', 'Scooby-Doo']
+                        +addOption(member, favoriteBeatle)
+        input(type= 'checkbox' name= 'iceCream' checked=icecream ? true: false)
