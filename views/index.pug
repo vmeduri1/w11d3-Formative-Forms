@@ -1,12 +1,13 @@
 extends layout.pug
 mixin userRow(user)
-    td= user.id
-    td= user.firstName
-    td= user.lastName
-    td= user.email
-    td
-    td
-    td 
+    tr
+        td= user.id
+        td= user.firstName
+        td= user.lastName
+        td= user.email
+        td
+        td
+        td
 block content
     h2 Existing Users
     table
