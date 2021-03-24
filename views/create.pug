@@ -1,7 +1,7 @@
 extends layout.pug
 
 block content
-    form(method= 'post')
+    form(method= 'post' action='/create')
         input(type= 'hidden' name= '_csrf' value= csrfToken)
         label(for= 'firstName') firstName:
         input(type= 'text' name= 'firstName' id= 'firstName')
@@ -13,4 +13,4 @@ block content
         input(type= 'password' name= 'password' id= 'password')
         label(for= 'confirmedPassword') confirmedPassword:
         input(type= 'password' name= 'confirmedPassword' id= 'confirmedPassword')
-        input(type= 'submit' name= 'submitInput' id='submitInput')
+        input(type= 'submit' name= 'submitInput' id='submitInput' value= 'Create User')
