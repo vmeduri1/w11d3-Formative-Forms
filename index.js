@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/create", csrfProtection, (req, res) => {
-  res.render('create', { csrfToken: req.csrfToken() });
+  res.render('create', { errors: [], csrfToken: req.csrfToken() });
 })
 
 app.post("/create", csrfProtection, (req, res) => {
