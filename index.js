@@ -37,7 +37,7 @@ function errors(req, res, next){
   if(password !== confirmedPassword) {
     errors.push("The provided values for the password and password confirmation fields did not match.");
   }
-  req.errors = errors;
+  req.body.errors = errors;
   next();
 }
 
@@ -73,18 +73,34 @@ app.get("/create-interesting", csrfProtection, (req, res) => {
 })
 
 app.post("/create-interesting", csrfProtection, errors, (req, res) => {
-  const { firstName, lastName, email, password, confirmedPassword, errors } = req.body;
+  const { firstName, lastName, email, password, confirmedPassword, age, favoriteBeatle, iceCream, errors } = req.body;
 
+  if (!age) {
+    errors.push("age is required")
+  } else if (age > 120 || age < 0 || typeof age !== 'number'){
+    errors.push("age must be a valid age");
+  }
+  if (!favoriteBeatle) {
+    errors.push("favoriteBeatle is required")
+  } else if (favoriteBeatle === "Scooby-Doo") {
+    errors.push("favoriteBeatle must be a real Beatle member")
+  }
+  // console.log(age);
   if (errors.length > 0) {
+    // res.render takes the pug file and renders it to HTML for the browser, sends
+    // as response to clients
     res.render('create',{ errors,
       firstName,
       lastName,
       email,
       password,
+      age,
+      favoriteBeatle,
+      iceCream,
       csrfToken: req.csrfToken() });
       return;
   }
-  users.push({ firstName, lastName, email, id: users.length + 2 })
+  users.push({ firstName, lastName, email, id: users.length + 2, age, favoriteBeatle, iceCream })
   res.redirect(302, '/');
 })
 
