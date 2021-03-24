@@ -29,6 +29,7 @@ app.get("/create", csrfProtection, (req, res) => {
 })
 
 app.post("/create", csrfProtection, (req, res) => {
+  const { firstName, lastName, email, password } = req.body;
   const errors = [];
   if(!firstName){
     errors.push('Please provide a first name.')
@@ -43,7 +44,17 @@ app.post("/create", csrfProtection, (req, res) => {
     errors.push("Please provide a password.")
   }
 
-  res.render('create', { csrfToken: req.csrfToken() });
+  if (errors.length > 0) {
+    console.log(errors);
+    res.render('create',{ errors,
+      firstName,
+      lastName,
+      email,
+      password,
+      csrfToken: req.csrfToken() });
+      return;
+  }
+
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

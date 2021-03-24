@@ -3,18 +3,18 @@ extends layout.pug
 block content
     ul
         p The following errors were found:
-            each error in errors
-                li= error
+        each error in errors
+            li= error
     form(method= 'post' action='/create')
         input(type= 'hidden' name= '_csrf' value= csrfToken)
         label(for= 'firstName') firstName:
-        input(type= 'text' name= 'firstName' id= 'firstName')
+        input(type= 'text' name= 'firstName' id= 'firstName' value= firstName)
         label(for= 'lastName') lastName:
-        input(type= 'text' name= 'lastName' id= 'lastName')
+        input(type= 'text' name= 'lastName' id= 'lastName' value= lastName)
         label(for= 'email') email:
-        input(type= 'email' name= 'email' id= 'email')
+        input(type= 'email' name= 'email' id= 'email' value= email)
         label(for= 'password') password:
-        input(type= 'password' name= 'password' id= 'password')
+        input(type= 'password' name= 'password' id= 'password' value= password)
         label(for= 'confirmedPassword') confirmedPassword:
         input(type= 'password' name= 'confirmedPassword' id= 'confirmedPassword')
         input(type= 'submit' name= 'submitInput' id='submitInput' value= 'Create User')
