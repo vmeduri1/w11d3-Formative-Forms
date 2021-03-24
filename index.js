@@ -44,16 +44,16 @@ app.post("/create", csrfProtection, (req, res) => {
     errors.push("Please provide a password.")
   }
 
-  if (errors.length > 0) {
-    console.log(errors);
+  // if (errors.length > 0) {
+    // console.log(errors);
     res.render('create',{ errors,
       firstName,
       lastName,
       email,
       password,
       csrfToken: req.csrfToken() });
-      return;
-  }
+      // return;
+  // }
 
 })
 
