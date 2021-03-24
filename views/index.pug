@@ -1,0 +1,17 @@
+extends layout.pug
+mixin userRow(user)
+    td= user.firstName
+    td= user.lastName
+    td= user.email
+block content
+    h2 Existing Users
+    table
+        thead
+        tr
+            th Id
+            th First Name
+            th Last Name
+            th Email
+        tbody
+            each user in users
+                +userRow(user)
