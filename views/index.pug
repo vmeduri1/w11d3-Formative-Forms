@@ -5,9 +5,9 @@ mixin userRow(user)
         td= user.firstName
         td= user.lastName
         td= user.email
-        td
-        td
-        td
+        td= user.age
+        td= user.favoriteBeatle
+        td= user.iceCream
 block content
     h2 Existing Users
     table

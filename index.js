@@ -86,6 +86,12 @@ app.post("/create-interesting", csrfProtection, errors, (req, res) => {
     errors.push("favoriteBeatle must be a real Beatle member")
   }
   console.log(parseInt(age));
+
+  let boolIceCream = false;
+  if(iceCream === 'on'){
+    boolIceCream = true;
+  }
+
   if (errors.length > 0) {
     // res.render takes the pug file and renders it to HTML for the browser, sends
     // as response to clients
@@ -97,11 +103,11 @@ app.post("/create-interesting", csrfProtection, errors, (req, res) => {
       password,
       age,
       favoriteBeatle,
-      iceCream,
+      iceCream: boolIceCream,
       csrfToken: req.csrfToken() });
       return;
   }
-  users.push({ firstName, lastName, email, id: users.length + 2, age, favoriteBeatle, iceCream })
+  users.push({ firstName, lastName, email, id: users.length + 2, age, favoriteBeatle, iceCream: boolIceCream })
   res.redirect(302, '/');
 })
 
